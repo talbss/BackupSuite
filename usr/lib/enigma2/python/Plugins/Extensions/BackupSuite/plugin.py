@@ -1,4 +1,4 @@
-from schermen import skinstarthd, skinstartsd, skinnewhd, skinnewsd, skinflashhd, skinflashsd
+from schermen import skinstartfullhd, skinstarthd, skinstartsd, skinnewfullhd, skinnewhd, skinnewsd, skinflashfullhd, skinflashhd, skinflashsd
 import os
 import gettext
 import enigma
@@ -70,7 +70,7 @@ try:
 	reader = XMLHelpReader(resolveFilename(SCOPE_PLUGINS, "Extensions/BackupSuite/mphelp.xml"))
 	backupsuiteHelp = registerHelp(*reader)
 except Exception as e:
-	print("[BackupSUite] Unable to initialize MPHelp:", e,"- Help not available!")
+	print("[BackupSuite] Unable to initialize MPHelp:", e,"- Help not available!")
 	backupsuiteHelp = None
 
 
@@ -80,7 +80,9 @@ class BackupStart(Screen):
 			sz_w = getDesktop(0).size().width()
 		except:
 			sz_w = 720
-		if sz_w >= 1280:
+		if sz_w == 1920:
+			self.skin = skinstartfullhd
+		elif sz_w >= 1280:
 			self.skin = skinstarthd
 		else:
 			self.skin = skinstartsd
@@ -116,7 +118,6 @@ class BackupStart(Screen):
 		if backupsuiteHelp:
 			backupsuiteHelp.open(self.session)
 
-		
 	def flashimage(self):
 		model = ""
 		files = "^.*\.zip"
@@ -164,8 +165,10 @@ class WhatisNewInfo(Screen):
 			sz_w = getDesktop(0).size().width()
 		except:
 			sz_w = 720
-		if sz_w >= 1280:
-			self.skin = skinnewhd
+		if sz_w == 1920:
+			self.skin = skinnewfullhd
+		elif sz_w >= 1280:
+				self.skin = skinnewhd
 		else:
 			self.skin = skinnewsd
 
@@ -190,7 +193,9 @@ class FlashImageConfig(Screen):
 			sz_w = getDesktop(0).size().width()
 		except:
 			sz_w = 720
-		if sz_w >= 1280:
+		if sz_w == 1920:
+			self.skin = skinflashfullhd
+		elif sz_w >= 1280:
 			self.skin = skinflashhd
 		else:
 			self.skin = skinflashsd
